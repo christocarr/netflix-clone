@@ -4,7 +4,7 @@ export const Inner = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: ${({direction}) => direction}
+    flex-direction: ${({direction}) => direction};
     max-width: 1100px;
     margin: auto;
     width: 100%;
@@ -16,9 +16,36 @@ export const Inner = styled.div`
 
 export const Item = styled.div`
     display: flex;
+    border-bottom: 8px, solid, #222;
+    padding: 50px 5%;
+    color: white;
+    overflow: hidden;
 `
 
-export const Container = styled.section``
+export const Container = styled.section`
+    background-color: black;
+
+    
+
+    @media (max-width: 1000px) {
+        ${Item}:last-of-type h2 {
+            margin-bottom: 50px;
+        }
+    }
+`
+
+export const Pane = styled.div`
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    width: 50%;
+
+    @media (max-width: 1000px){
+        width: 100%;
+        padding: 0 45px;
+        text-align: center;
+    }
+`
 
 export const Title = styled.h1`
     font-size: 50px;
