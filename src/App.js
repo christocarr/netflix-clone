@@ -1,14 +1,16 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Home from './pages/home'
+import Signin from './pages/signin'
 import * as Routes from './constants/routes'
+
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route path={Routes.SIGN_IN}>
-          <p>Sign in page</p>
+          <Signin />
         </Route>
         <Route path={Routes.SIGN_UP}>
           <p>Sign up page</p>
