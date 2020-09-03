@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link as RouterLink} from 'react-router-dom'
 import {Link, 
   Text, 
@@ -9,7 +9,10 @@ import {Link,
   Group,
   Feature,
   FeatureCallOut,
-  PlayButton} from './styles/header'
+  PlayButton,
+  Search,
+  SearchIcon,
+  SearchInput} from './styles/header'
 
 export default function Header({bg=true, children, ...restProps}) {
   return bg ? <Background {...restProps}>{children}</Background> : children
@@ -24,6 +27,24 @@ Header.Logo = function HeaderLogo({to, ...restProps}) {
     <RouterLink to={to}>
       <Logo {...restProps} />
     </RouterLink>
+  )
+}
+
+Header.Search = function HeaderSearch({searchTerm, setSearchTerm, ...restProps}) {
+  const [searchActive, setSearchActive] = useState(false);
+  
+  return (
+    <Search {...restProps}>
+      <SearchIcon onClick={() => setSearchActive(!searchActive)}>
+        <img src="/images/icons/search.png" alt="Search" />
+      </SearchIcon>
+      <SearchInput
+        value={searchTerm}
+        onChange={({ target }) => setSearchTerm(target.value)}
+        placeholder="Search files and series"
+        active={searchActive}
+      />
+    </Search>
   )
 }
 
