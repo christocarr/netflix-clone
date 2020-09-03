@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Home from './pages/home'
 import Signin from './pages/signin'
+import Signup from './pages/signup'
 import * as Routes from './constants/routes'
 
 
@@ -13,7 +14,7 @@ function App() {
           <Signin />
         </Route>
         <Route path={Routes.SIGN_UP}>
-          <p>Sign up page</p>
+          <Signup />
         </Route>
         <Route path={Routes.BROWSE}>
           <p>Browse page</p>
