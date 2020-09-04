@@ -1,17 +1,19 @@
 import React, {useState, useContext, useEffect} from 'react'
 import Header from '../components/header'
 import Loading from '../components/loading'
+import Card from '../components/card'
 import {FooterContainer} from './footer'
 import * as ROUTES from '../constants/routes'
 import {FirebaseContext} from '../context/firebase';
 import {SelectProfileContainer} from './profiles';
 
-export default function BrowseContainer() {
+export default function BrowseContainer({slides}) {
 
   const [profile, setProfile] = useState({})
   const [category, setCategory] = useState('series')
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
+  const [slideRows, setSlideRows] = useState([]);
 
   const {firebase} = useContext(FirebaseContext)
 
@@ -25,6 +27,10 @@ export default function BrowseContainer() {
       setLoading(false)
     }, 3000)
   }, [user])
+
+  useEffect(() => {
+    setSlideRows(slides[category]);
+  }, [slides, category]);
 
   return profile.displayName ? (
     <>
@@ -76,6 +82,30 @@ export default function BrowseContainer() {
         <Header.PlayButton>Play</Header.PlayButton>
       </Header.Feature>
     </Header>
+
+    <Card.Group>
+      {slideRows.map((slideItem) => (
+        <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+          <Card.Title>{slideItem.title}</Card.Title>
+          <Card.Entities>
+            {slideItem.data.map((item) => (
+              <Card.Item key={item.docId} item={item}>
+                <Card.Image src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`} />
+                <Card.Meta>
+                  <Card.SubTitle>{item.title}</Card.SubTitle>
+                  <Card.Text>{item.description}</Card.Text>
+                </Card.Meta>
+              </Card.Item>
+            ))}
+          </Card.Entities>
+
+          <Card.Feature category={category}>
+            
+          </Card.Feature>
+
+        </Card>
+      ))}
+    </Card.Group>
     
     <FooterContainer />
     </>
