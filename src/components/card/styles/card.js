@@ -194,6 +194,6 @@ export const Maturity = styled.div`
   color: white;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  margin-right: 10px;
+  margin: 10px 10px 10px 0;
   font-size: 12px;
 `
